@@ -4,8 +4,7 @@ var User = require(__dirname + '/../models/user');
 module.exports = exports = function(req, res, next) {
   var token = req.headers.token || (req.body)? req.body.token : '';
   if (!token){
-    console.log('no token')
-    return res.json({msg: 'authenitCat seyz noe!1111@! and is watching youuuu!'});
+    return res.json({msg: 'authentiCat seyz noe!1111@! and is watching youuuu!'});
   }
   eat.decode(token, process.env.APP_SECRET, function(err, decoded){
     if (err) {

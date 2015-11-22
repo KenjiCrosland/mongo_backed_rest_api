@@ -48,7 +48,7 @@ recipeRouter.put('/recipes/:id', bodyParser.json(), eatAuth, function(req, res){
   });
 });
 
-recipeRouter.delete('/recipes/:id', eatAuth, function(req, res){
+recipeRouter.delete('/recipes/:id', bodyParser.json(), eatAuth, function(req, res){
   Recipe.remove({_id: req.params.id}, function(err){
     if (err) return err;
     res.json({msg: 'Recipe deleted!'});
