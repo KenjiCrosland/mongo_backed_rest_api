@@ -6,7 +6,7 @@ var app = express();
 var recipesRouter = require(__dirname + '/routes/recipes_routes');
 var ingredientsRouter = require(__dirname + '/routes/ingredients_routes');
 var authRouter = require(__dirname + '/routes/auth_routes');
-
+process.env.APP_SECRET = process.env.APP_SECRET = "changeme" //Use secret key
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/recipe_database');
 
 app.use(recipesRouter);
