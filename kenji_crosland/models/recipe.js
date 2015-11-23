@@ -5,6 +5,8 @@ var reviewSchema = require(__dirname + '/review.js').reviewSchema;
 var recipeSchema = mongoose.Schema({
   title: String,
   ingredients: Array,
+  user: String,
+  userId: String,
   reviews: [reviewSchema]
 });
 

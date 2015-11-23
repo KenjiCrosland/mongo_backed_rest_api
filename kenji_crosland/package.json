@@ -9,7 +9,9 @@
   "author": "Kenji Crosland",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "latest",
     "body-parser": "^1.14.1",
+    "eat": "^0.1.1",
     "express": "^4.13.3",
     "mongoose": "^4.2.5"
   },
