@@ -1,3 +1,4 @@
+//Got help from in class code
 module.exports = function(req, res, next) {
     try {
     //Could be chained into one line

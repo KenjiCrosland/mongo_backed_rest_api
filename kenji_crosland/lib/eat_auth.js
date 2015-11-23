@@ -1,3 +1,4 @@
+//Got help from in class code
 var eat = require('eat');
 var User = require(__dirname + '/../models/user');
 
