@@ -22,7 +22,7 @@ describe('All routes on on the recipe app', function(){
   });
 
   describe('authorization routes', function(done){
-    it('should create a user with a username and password', function(done){
+    before(function(done){
       var userData = {username: 'Iron Chef', password:'foobar123'};
       chai.request('http://localhost:3000')
       .post('/signup')
@@ -31,11 +31,35 @@ describe('All routes on on the recipe app', function(){
         token = res.body.token;
         expect(err).to.eql(null);
         expect(token).to.not.eql("");
+        done();
+      });
+    });
+
+    it('should have created a user with a the post request above', function(done){
         User.findOne({'auth.basic.username': 'Iron Chef'}, function(err, user){
           expect(user).to.not.eql(null);
           expect(user.username).to.eql('Iron Chef');
           done();
         });
+    });
+    it('should be able to log in with an existing username', function(done){
+      chai.request('http://localhost:3000')
+      .get('/signin')
+      .auth('Iron Chef', 'foobar123')
+      .end(function(err, res){
+        expect(err).to.eql(null);
+        expect(token).to.not.eql("");
+        done();
+      });
+    });
+
+    it('should NOT be able to log in with an existing username', function(done){
+      chai.request('http://localhost:3000')
+      .get('/signin')
+      .auth('Iron Chef', 'wrongpassword')
+      .end(function(err, res){
+        expect(res.body.msg).to.eql('authentiCat seeeez noe!');
+        done();
       });
     });
 
