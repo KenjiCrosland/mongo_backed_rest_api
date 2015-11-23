@@ -7,22 +7,22 @@ var authRouter = module.exports = exports = express.Router();
 
 authRouter.post('/signup', jsonParser, function(req, res){
   var user = new User();
-  user.auth.basic.username = req.body.username;
   user.username = req.body.username;
+  user.auth.basic.username = req.body.username;
   user.hashPassword(req.body.password);
 
   user.save(function(err,data){
-    //Check if the username is unique
-    //consider handle-error from handle server error.
+    if (err && (11000 === err.code || 11001 === err.code)){
+      return res.status(401).json({msg: 'authentiCat seayz this user already exists'});
+    }
     if (err) throw err;
-    //profit
+
     user.generateToken(function(err, token){
       if (err) throw err;
       res.json({token: token});
     })
 
   });
-  //check if the username is unique
 })
 
 authRouter.get('/signin', basicHttp, function(req, res){

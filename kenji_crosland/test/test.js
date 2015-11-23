@@ -35,9 +35,20 @@ describe('All routes on on the recipe app', function(){
           expect(user).to.not.eql(null);
           expect(user.username).to.eql('Iron Chef');
           done();
-        })
-      })
-    })
+        });
+      });
+    });
+
+    it('should NOT create a user with an existing username', function(done){
+      var userData = {username: 'Iron Chef', password:'foobar123'};
+      chai.request('http://localhost:3000')
+      .post('/signup')
+      .send(userData)
+      .end(function(err, res){
+        expect(res.body.msg).to.eql('authentiCat seayz this user already exists');
+        done();
+      });
+    });
   });
 
   describe('recipe routes with a valid token', function(){
@@ -132,6 +143,17 @@ describe('All routes on on the recipe app', function(){
       });
     });
 
+    it('should NOT create a recipe with a POST request and an invalid token',function(done){
+      var recipeData = {title:'Tacos', ingredients:['pork', 'cumin', 'chili powder', 'garlic', 'onions', 'tomatoes'], token: 'Nadda real token'};
+      chai.request('http://localhost:3000')
+      .post('/recipes')
+      .send(recipeData)
+      .end(function(err,res){
+        expect(res.body.msg).to.eql('authenitCat seyz noe!1111@!');
+        done();
+      });
+    });
+
     it('should still get all the recipes with a GET request without the token', function(done){
       chai.request('http://localhost:3000')
       .get('/allrecipes')
@@ -161,6 +183,16 @@ describe('All routes on on the recipe app', function(){
         });
       });
 
+      it('should NOT be modified by a PUT request with an invalid token', function(done){
+        chai.request('http://localhost:3000')
+        .put('/recipes/' + this.recipe._id)
+        .send({title:"Spicy Teriyaki", ingredients:['rice', 'chicken', 'soy sauce', 'siracha', 'sugar'], reviews: [{text:"It was okay", rating:3}], token: "Nadda real token"})
+        .end(function(err, res){
+          expect(res.body.msg).to.eql('authenitCat seyz noe!1111@!');
+          done();
+        });
+      });
+
       it('should NOT be modified by a PUT request with a review', function(done){
         chai.request('http://localhost:3000')
         .put('/recipes/review/' + this.recipe._id)
@@ -177,6 +209,16 @@ describe('All routes on on the recipe app', function(){
         .end(function(err, res){
           expect(err).to.eql(null);
           expect(Array.isArray(res.body)).to.eql(true);
+          done();
+        });
+      });
+
+      it('should NOT be deleted by a DELETE request with an invalid token', function(done){
+        chai.request('http://localhost:3000')
+        .delete('/recipes/' + this.recipe._id)
+        .send({token: 'Nadda real token'})
+        .end(function(err, res){
+          expect(res.body.msg).to.eql('authenitCat seyz noe!1111@!');
           done();
         });
       });
