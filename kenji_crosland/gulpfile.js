@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
+var webpack = require('webpack-stream');
 var appFiles = ['index.js','models/**/*.js', 'routes/**/*.js', 'gulpfile.js', 'lib/**/*.js'];
 var testFiles = ['./test/**/*.js'];
 
@@ -31,5 +32,21 @@ gulp.task('mocha', ['jshint'], function(){
   .pipe(mocha({reporter: 'spec'}));
 });
 
+gulp.task('static:dev', function(){
+  gulp.src('app/**/*.html')
+  .pipe(gulp.dest('build/'));
+});
+
+gulp.task('webpack:dev', function(){
+  gulp.src('app/js/entry.js')
+  .pipe(webpack({
+    output: {
+      filename: 'bundle.js'
+    }
+  }))
+  .pipe(gulp.dest('build/'));
+})
+
+gulp.task('build:dev', ['webpack:dev', 'static:dev']);
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
-gulp.task('default', ['jshint', 'mocha']);
+gulp.task('default', ['build:dev', 'jshint', 'mocha']);
