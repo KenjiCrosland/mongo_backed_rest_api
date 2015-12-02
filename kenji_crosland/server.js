@@ -13,20 +13,7 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/recipe_databas
 app.use(recipesRouter);
 app.use(ingredientsRouter);
 app.use(authRouter);
-
-app.get('/:filename', function(req, res){
-  fs.stat(__dirname + '/build/' + req.params.filename, function(err, stats){
-    if (err) {
-      console.log(err);
-      return next();
-    }
-
-    if (!stats.isFile()) return next();
-
-    var file = fs.createReadStream(__dirname + '/build/' + req.params.filename);
-    file.pipe(res);
-  });
-});
+app.use(express.static(__dirname + '/build'));
 
 app.use(function(req, res){
   res.status(404).send('could not find file');

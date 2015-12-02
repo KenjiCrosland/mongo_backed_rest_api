@@ -20,10 +20,10 @@ authRouter.post('/signup', jsonParser, function(req, res){
     user.generateToken(function(err, token){
       if (err) throw err;
       res.json({token: token});
-    })
+    });
 
   });
-})
+});
 
 authRouter.get('/signin', basicHttp, function(req, res){
   if (!(req.auth.username && req.auth.password)) {
@@ -37,17 +37,17 @@ authRouter.get('/signin', basicHttp, function(req, res){
     return res.status(401).json({msg: 'authentiCat seayz noe!'});
     }
     if (!user){
-      console.log('you are not a user')
+      console.log('you are not a user');
       return res.status(401).json({msg: 'authentiCat seayz u r not a urzr!'});
     }
     if (!user.checkPassword(req.auth.password)) {
       console.log('the password donut match');
-      return res.status(401).json({msg: 'authentiCat seeeez noe!'})
+      return res.status(401).json({msg: 'authentiCat seeeez noe!'});
     }
     user.generateToken(function(err, token){
       if (err) throw err;
 
       res.json({token: token});
-    })
-  })
-})
+    });
+  });
+});

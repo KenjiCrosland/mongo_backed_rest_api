@@ -47,15 +47,8 @@
 	__webpack_require__(1);
 	var angular = window.angular;
 
-	var bearApp = angular.module('bearstream', []);
-
-	bearApp.controller('GreetingController', ['$scope', function($scope){
-	  $scope.greeting = 'Hello World, Also Iron Chefs';
-
-	  $scope.alertGreeting = function() {
-	    alert($scope.greeting);
-	  }
-	}])
+	var recipeApp = angular.module('recipeApp', []);
+	__webpack_require__(2)(recipeApp);
 
 
 /***/ },
@@ -29080,6 +29073,81 @@
 	})(window, document);
 
 	!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app){
+	  __webpack_require__(3)(app);
+	};
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.controller('RecipesController', ['$scope', '$http', function($scope, $http){
+	    $scope.recipes = [];
+	    $scope.editing = {};
+
+	    $scope.makeCopy = function(recipe) {
+	      $scope.editing[recipe._id] = angular.copy(recipe);
+	    }
+
+	    $scope.cancelEditing = function(recipe) {
+	      recipe.editing = false;
+	      for(i = 0; i < $scope.recipes.length; i++){
+	        if($scope.recipes[i]._id === recipe._id){
+	          angular.copy($scope.editing[recipe._id], $scope.recipes[i]);
+	          delete $scope.editing[recipe._id];
+	          return;
+	        }
+	      }
+	    }
+
+	    $scope.getAll = function() {
+	      $http.get('/allrecipes')
+	      .then(function(res){
+	        $scope.recipes = res.data;
+	      }, function(err){
+	        console.log(err.data);
+	      });
+	    };
+
+	    $scope.create = function(recipe) {
+	      $http.post('/recipes', recipe)
+	        .then(function(res){
+	          $scope.recipes.push(res.data);
+	          $scope.newRecipe = null;
+	        }, function(err){
+	          console.log(err.data);
+	        });
+	    };
+
+	    $scope.update = function(recipe) {
+	      recipe.editing = false;
+	      $http.put('/recipes/' + recipe._id, recipe)
+	        .then(function(res){
+	          console.log('Recipe updated!')
+	        }, function(err){
+	          console.log(err.data)
+	        })
+	    }
+
+	    $scope.remove = function(recipe) {
+	      $scope.recipes.splice($scope.recipes.indexOf(recipe), 1);
+	      $http.delete('/recipes/' + recipe._id)
+	        .then(function(res){
+	          console.log('totes cool, recipe is gone gone gone');
+	        }, function(err){
+	          console.log(err.data);
+	        })
+	    }
+	  }]);
+	}
+
 
 /***/ }
 /******/ ]);

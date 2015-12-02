@@ -10,22 +10,22 @@ module.exports = exports = function(req, res, next) {
   eat.decode(token, process.env.APP_SECRET, function(err, decoded){
     if (err) {
       console.log(err);
-      return res.json({msg: 'authenitCat seyz noe!1111@!'})
+      return res.json({msg: 'authenitCat seyz noe!1111@!'});
     }
 
     User.findOne({_id: decoded.id}, function(err, user){
       if (err) {
         console.log(err);
-        return res.status(401).json({msg: 'authentiCat seyz noe121!'})
+        return res.status(401).json({msg: 'authentiCat seyz noe121!'});
       }
 
       if (!user) {
         console.log(err);
-        return res.status(401).json({msg: 'authentiCat seyz noe121!'})
+        return res.status(401).json({msg: 'authentiCat seyz noe121!'});
       }
 
       req.user = user;
       next();
-    })
-  })
+    });
+  });
 };
