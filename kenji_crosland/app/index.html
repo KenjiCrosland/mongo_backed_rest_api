@@ -13,19 +13,25 @@
       <input type="text" id="newRecipeTitle" required data-ng-model="newRecipe.title">
       <button type="submit" data-ng-disabled="newRecipeForm.$invalid">Create New Recipe</button>
     </form>
-  <ul id="recipeList">
-    <li data-ng-repeat="recipe in recipes">
-      {{recipe.title}}
-      <form name="recipeForm{{recipe._id}}" data-ng-submit="update(recipe)" data-ng-if="recipe.editing">
-        <label for="recipeTitle{{recipe._id}}">Recipe Name: </label>
-        <input type="text" id="recipeTitle{{recipe._id}}" required data-ng-model="recipe.title">
-        <button type="submit" id="recipeForm{{recipe._id}}">Update Recipe</button>
-        <button data-ng-click="cancelEditing(recipe)">Cancel Update</button>
-      </form>
-      <button data-ng-click="recipe.editing = true; makeCopy(recipe)">Edit Recipe</button>
-      <button data-ng-click="remove(recipe)">Remove Recipe</button>
-    </li>
-  </ul>
+    <ul id="recipeList">
+      <li data-ng-repeat="recipe in recipes">
+        <form name="recipeForm{{recipe._id}}" data-ng-submit="update(recipe)" data-ng-if="recipe.editing">
+          <label for="recipeTitle{{recipe._id}}">Recipe Name: </label>
+          <input type="text" id="recipeTitle{{recipe._id}}" required data-ng-model="recipe.title">
+          <input data-ng-repeat="ingredient in recipe.ingredients" type="text" id="recipeIngredient{{recipe._id}}{{ingredient.val}}" data-ng-model="ingredient">
+          <button type="submit" id="recipeForm{{recipe._id}}">Update Recipe</button>
+          <button data-ng-click="cancelEditing(recipe)">Cancel Update</button>
+        </form>
+        <form name="editRecipe{{recipe._id}}" data-ng-if="!recipe.editing">
+          {{recipe.title}}
+          <span data-ng-if="recipe.ingredients.length > 0">Ingredients:
+          <span data-ng-repeat="ingredient in recipe.ingredients">{{ingredient}}, </span>
+          </span>
+          <button data-ng-click="makeCopy(recipe)">Edit Recipe</button>
+          <button data-ng-click="remove(recipe)">Remove Recipe</button>
+        </form>
+      </li>
+    </ul>
   </main>
   <script src="bundle.js"></script>
 </body>

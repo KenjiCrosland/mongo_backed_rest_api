@@ -2,13 +2,15 @@ module.exports = function(app) {
   app.controller('RecipesController', ['$scope', '$http', function($scope, $http){
     $scope.recipes = [];
     $scope.editing = {};
+    $scope.newRecipe = null;
 
     $scope.makeCopy = function(recipe) {
+      recipe.editing = true;
       $scope.editing[recipe._id] = angular.copy(recipe);
     }
 
     $scope.cancelEditing = function(recipe) {
-      recipe.editing = false;
+      $scope.editing[recipe._id].editing = false;
       for(i = 0; i < $scope.recipes.length; i++){
         if($scope.recipes[i]._id === recipe._id){
           angular.copy($scope.editing[recipe._id], $scope.recipes[i]);
