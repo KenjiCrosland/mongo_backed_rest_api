@@ -42,10 +42,18 @@
 .card-headline {
   padding: .5em;
   color: #fff;
-  background-color: #0DCCC1;
-  margin-left: -.6em;
-  margin-right: -.6em;
+  margin-left: -.7em;
+  margin-right: -.7em;
   margin-top: 0;
+}
+
+/* Coloring */
+
+.background-brown {
+  background-color: #998D56;
+}
+.background-green {
+  background-color: #69DFFF;
 }
 
 

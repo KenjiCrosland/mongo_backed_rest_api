@@ -12,7 +12,7 @@
         <h1 class="main-headline">Our Super Recipe App</h1>
     </section>
     <section class="card row">
-      <h2 class="card-headline">Add a new Recipe!</h2>
+      <h2 class="card-headline background-green">Add a new Recipe!</h2>
       <form name="newRecipeForm" data-ng-submit="create(newRecipe)">
           <label for="newRecipeTitle">Recipe Name: </label>
           <input type="text" id="newRecipeTitle" required data-ng-model="newRecipe.title">
@@ -21,7 +21,7 @@
       </section>
     <section class="row">
     <section class="card one-third column">
-    <h2 class="card-headline">Recipe List</h2>
+    <h3 class="card-headline background-brown">Recipe List</h2>
     <ul id="recipeList">
       <section data-ng-repeat="recipe in recipes">
         <li>
@@ -31,7 +31,7 @@
     </ul>
   </section>
    <section class="card two-thirds column" data-ng-if="currentRecipe !== null">
-     <h2 class="card-headline">{{currentRecipe.title}}</h2>
+     <h3 class="card-headline background-brown">{{currentRecipe.title}}</h2>
       <form class="edit-recipe-form" name="recipeForm{{currentRecipe._id}}" data-ng-submit="update(currentRecipe)" data-ng-if="currentRecipe.editing">
           <fieldset class="recipe-fieldset">
             <legend>Edit recipe:</legend>
