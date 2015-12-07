@@ -2,7 +2,12 @@ module.exports = function(app) {
   app.controller('RecipesController', ['$scope', '$http', function($scope, $http){
     $scope.recipes = [];
     $scope.editing = {};
+    $scope.currentRecipe = null;
     $scope.newRecipe = null;
+
+    $scope.seeRecipe = function(recipe){
+      $scope.currentRecipe = recipe;
+    }
 
     $scope.makeCopy = function(recipe) {
       recipe.editing = true;
@@ -17,6 +22,12 @@ module.exports = function(app) {
           delete $scope.editing[recipe._id];
           return;
         }
+      }
+    }
+
+    $scope.addIngredientField = function(recipe) {
+      if (recipe.ingredients[-1] !== "") {
+        recipe.ingredients.push("");
       }
     }
 

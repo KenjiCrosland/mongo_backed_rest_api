@@ -2,6 +2,9 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var webpack = require('webpack-stream');
+var minifyCss = require('gulp-minify-css');
+var concatCss = require('gulp-concat-css');
+var gulpWatch = require('gulp-watch');
 var appFiles = ['index.js','models/**/*.js', 'routes/**/*.js', 'gulpfile.js', 'lib/**/*.js'];
 var testFiles = ['./test/**/*.js'];
 
@@ -37,6 +40,22 @@ gulp.task('static:dev', function(){
   .pipe(gulp.dest('build/'));
 });
 
+gulp.task('css:dev', function(){
+  return gulp.src([
+    'app/css/reset.css',
+    'app/css/base.css',
+    'app/css/layout.css',
+    'app/css/module.css',
+    'app/css/state.css'])
+  .pipe(concatCss('styles.min.css'))
+  .pipe(minifyCss())
+  .pipe(gulp.dest('build/'));
+});
+
+gulp.task('css:watch', function() {
+  gulp.watch('./app/css/**/*.css', ['css:dev']);
+})
+
 gulp.task('webpack:dev', function(){
   gulp.src('app/js/entry.js')
   .pipe(webpack({
@@ -57,6 +76,7 @@ gulp.task('webpack:test', function(){
   .pipe(gulp.dest('test/client/'))
 })
 
+gulp.task('static:watch')
 gulp.task('build:dev', ['webpack:dev', 'static:dev']);
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('default', ['build:dev', 'jshint', 'mocha']);
