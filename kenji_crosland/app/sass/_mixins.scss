@@ -1,0 +1,6 @@
+@mixin card-headline($background-color) {
+  padding: .5em;
+  color: #fff;
+  margin-top: 0;
+  background-color: $background-color;
+}
