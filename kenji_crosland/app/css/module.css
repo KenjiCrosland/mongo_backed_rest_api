@@ -34,7 +34,6 @@
 .card {
   height: 100%;
   margin-top: 1em;
-  padding: 0 1em 1em 1em;
   border: 1px solid #bbb;
   box-shadow: 3px 3px 1px #bbb
 }
@@ -42,9 +41,15 @@
 .card-headline {
   padding: .5em;
   color: #fff;
-  margin-left: -.7em;
-  margin-right: -.7em;
   margin-top: 0;
+}
+
+.card-top {
+  padding: 0;
+}
+
+.card-bottom {
+  padding: 1em;
 }
 
 /* Coloring */
