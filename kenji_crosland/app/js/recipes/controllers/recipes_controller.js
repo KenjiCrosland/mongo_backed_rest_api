@@ -31,6 +31,10 @@ module.exports = function(app) {
       }
     }
 
+    $scope.removeIngredientField = function(recipe, ingredient) {
+      recipe.ingredients.splice(recipe.ingredients.indexOf(ingredient), 1);
+    }
+
     $scope.getAll = function() {
       $http.get('/allrecipes')
       .then(function(res){

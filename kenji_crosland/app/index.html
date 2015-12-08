@@ -31,7 +31,7 @@
     <ul class="recipe-list">
       <section data-ng-repeat="recipe in recipes">
         <li>
-          <button class="btn" data-ng-click="seeRecipe(recipe)">{{recipe.title}}</a>
+          <button type="button" class="btn" data-ng-click="seeRecipe(recipe)">{{recipe.title}}</a>
         </button>
     </section>
     </ul>
@@ -47,11 +47,14 @@
             <input type="text" id="recipeTitle{{currentRecipe._id}}" required data-ng-model="currentRecipe.title">
             <fieldset>
               <legend>Ingredients:</legend>
-              <input type="text" id="recipeTitle{{currentRecipe._id}}" data-ng-repeat="ingredient in currentRecipe.ingredients track by $index" data-ng-model="currentRecipe.ingredients[$index]">
-              <button class="btn add-ingredient" data-ng-click="addIngredientField(currentRecipe)">Add Ingredient</button>
+              <section class="ingredient-fields" data-ng-repeat="ingredient in currentRecipe.ingredients track by $index">
+              <input type="text" id="recipeTitle{{currentRecipe._id}}" data-ng-model="currentRecipe.ingredients[$index]">
+              <button type="button" data-ng-click="removeIngredientField(currentRecipe, ingredient)">Remove</button>
+              </section>
+              <button type="button" class="btn add-ingredient" data-ng-click="addIngredientField(currentRecipe)">Add Ingredient</button>
             </fieldset>
             <button class="btn" type="submit" id="recipeForm{{currentRecipe._id}}">Update Recipe</button>
-            <button class="btn" data-ng-click="cancelEditing(currentRecipe)">Cancel Update</button>
+            <button class="btn" type="button" data-ng-click="cancelEditing(currentRecipe)">Cancel Update</button>
         </form>
     <div class="card-bottom" data-ng-if="!currentRecipe.editing">
      <strong>Ingredients:</strong>
