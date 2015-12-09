@@ -77,6 +77,6 @@ gulp.task('webpack:test', function(){
 })
 
 gulp.task('static:watch')
-gulp.task('build:dev', ['webpack:dev', 'static:dev']);
+gulp.task('build:dev', ['webpack:dev', 'static:dev', 'css:dev']);
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('default', ['build:dev', 'jshint', 'mocha']);
