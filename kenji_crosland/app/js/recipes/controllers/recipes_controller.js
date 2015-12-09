@@ -1,9 +1,10 @@
 module.exports = function(app) {
-  app.controller('RecipesController', ['$scope', '$http', function($scope, $http){
+  app.controller('RecipesController', ['$scope', '$http', 'cfResource', function($scope, $http, cfResource){
     $scope.recipes = [];
     $scope.editing = {};
     $scope.currentRecipe = null;
     $scope.newRecipe = null;
+    var recipeResource cfResource('recipes')
 
     $scope.seeRecipe = function(recipe){
       $scope.currentRecipe = recipe;
@@ -36,12 +37,10 @@ module.exports = function(app) {
     }
 
     $scope.getAll = function() {
-      $http.get('/allrecipes')
-      .then(function(res){
-        $scope.recipes = res.data;
-      }, function(err){
-        console.log(err.data);
-      });
+     recipeResource.getAll(function(err, data){
+      if (err) return err;
+      $scope.recipes = data;
+     })
     };
 
     $scope.create = function(recipe) {
