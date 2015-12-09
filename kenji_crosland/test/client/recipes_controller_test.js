@@ -82,7 +82,7 @@ describe('recipes controller', function() {
       $scope.remove(recipe);
       $httpBackend.flush();
       expect($scope.recipes.length).toBe(0);
-    })
+    });
 
   });
 });

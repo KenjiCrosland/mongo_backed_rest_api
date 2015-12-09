@@ -52,7 +52,7 @@ gulp.task('sass:dev', function(){
 
 gulp.task('sass:watch', function() {
   gulp.watch(['./app/sass/**/*.scss', './app/index.html'], ['sass:dev','static:dev']);
-})
+});
 
 gulp.task('webpack:dev', function(){
   gulp.src('app/js/entry.js')
@@ -71,10 +71,10 @@ gulp.task('webpack:test', function(){
       filename: 'test_bundle.js'
     }
   }))
-  .pipe(gulp.dest('test/client/'))
-})
+  .pipe(gulp.dest('test/client/'));
+});
 
-gulp.task('static:watch')
+gulp.task('static:watch');
 gulp.task('build:dev', ['webpack:dev', 'static:dev', 'sass:dev']);
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('default', ['build:dev', 'jshint', 'mocha']);

@@ -19,7 +19,7 @@ $accent: $carnation;
 $strong-accent: $cardinal-red;
 
 $button: (
-  disabled-background: lighten($primary2, 25%),
+  disabled-background: lighten($primary2, 15%),
   disabled-border: lighten($primary2, 50%),
   disabled-text: $light-shading
 );
