@@ -7,11 +7,19 @@ $wheat: #F2E1AC;
 $salmon: #F2836B;
 $carnation: #F2594B;
 $cardinal-red: #CD2C24;
+$light-gray: #eef;
 
 //Theme variables
+$light-shading: $light-gray;
 $background: $wheat;
 $light-background: $linen;
 $primary1: $salmon;
 $primary2: $dark-turquoise;
 $accent: $carnation;
 $strong-accent: $cardinal-red;
+
+$button: (
+  disabled-background: lighten($primary2, 25%),
+  disabled-border: lighten($primary2, 50%),
+  disabled-text: $light-shading
+);

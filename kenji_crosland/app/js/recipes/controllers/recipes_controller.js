@@ -26,7 +26,7 @@ module.exports = function(app) {
     }
 
     $scope.addIngredientField = function(recipe) {
-      if (recipe.ingredients[-1] !== "") {
+      if (recipe.ingredients[recipe.ingredients.length - 1] !== "") {
         recipe.ingredients.push("");
       }
     }

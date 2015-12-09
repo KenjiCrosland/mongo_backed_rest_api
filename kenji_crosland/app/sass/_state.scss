@@ -1,0 +1,5 @@
+button[disabled] {
+  background-color: map-get($button, disabled-background);
+  border-color: map-get($button, disabled-border);
+  color: map-get($button, disabled-text);
+}

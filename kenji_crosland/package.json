@@ -35,6 +35,7 @@
     "karma-phantomjs-launcher": "^0.2.1",
     "mocha": "^2.3.3",
     "phantomjs": "^1.9.19",
+    "sass-list-maps": "^1.0.0-b",
     "webpack-stream": "^2.1.1"
   }
 }
