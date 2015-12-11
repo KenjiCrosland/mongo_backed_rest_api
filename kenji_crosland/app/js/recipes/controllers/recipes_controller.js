@@ -3,8 +3,6 @@ module.exports = function(app) {
     $scope.recipes = [];
     $scope.editing = {};
     $scope.currentRecipe = null;
-    $scope.newRecipe = null;
-    var recipeResource cfResource('recipes')
 
     $scope.seeRecipe = function(recipe){
       $scope.currentRecipe = recipe;
@@ -37,40 +35,30 @@ module.exports = function(app) {
     }
 
     $scope.getAll = function() {
-     recipeResource.getAll(function(err, data){
+     cfResource('/allrecipes').getAll(function(err, data){
       if (err) return err;
       $scope.recipes = data;
-     })
+     });
     };
 
     $scope.create = function(recipe) {
-      $http.post('/recipes', recipe)
-        .then(function(res){
-          $scope.recipes.push(res.data);
-          $scope.newRecipe = null;
-        }, function(err){
-          console.log(err.data);
-        });
+      cfResource('/recipes', recipe).post(function(err, data){
+        $scope.recipes.push(data);
+      });
     };
 
     $scope.update = function(recipe) {
       recipe.editing = false;
-      $http.put('/recipes/' + recipe._id, recipe)
-        .then(function(res){
-          console.log('Recipe updated!')
-        }, function(err){
-          console.log(err.data)
-        })
+      cfResource('/recipes/' + recipe._id, recipe).put(function(err, data) {
+        console.log('Recipe updated!');
+      });
     }
 
     $scope.remove = function(recipe) {
       $scope.recipes.splice($scope.recipes.indexOf(recipe), 1);
-      $http.delete('/recipes/' + recipe._id)
-        .then(function(res){
-          console.log('totes cool, recipe is gone gone gone');
-        }, function(err){
-          console.log(err.data);
-        })
+      cfResource('/recipes/' + recipe._id).delete(function(err, data){
+        console.log('Totes cool. Recipe is gone.')
+      })
     }
   }]);
 }

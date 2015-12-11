@@ -55,11 +55,9 @@ describe('recipes controller', function() {
     it('should be able to create a recipe', function() {
       $httpBackend.expectPOST('/recipes').respond(200, {title: 'Hipster Sriracha Tacos'});
       expect($scope.recipes.length).toBe(0);
-      $scope.newRecipe = {title: 'hello'};
       $scope.create({title: 'Hipster Sriracha Tacos'});
       $httpBackend.flush();
       expect($scope.recipes[0].title).toBe('Hipster Sriracha Tacos');
-      expect($scope.newRecipe).toBe(null);
     });
 
     it('should be able to update a recipe', function(){

@@ -9,65 +9,60 @@
 <body data-ng-app="recipeApp">
   <main class="container" data-ng-controller="RecipesController" data-ng-init="getAll()">
     <section class="row top-row">
-        <h1 class="main-headline">Our Super Recipe App</h1>
+      <h1 class="main-headline">Our Super Recipe App</h1>
     </section>
     <section class="card row">
       <div class="card-top">
         <h2>Add a new Recipe!</h2>
       </div>
       <div class="card-bottom">
-      <form class="card-form" name="newRecipeForm" data-ng-submit="create(newRecipe)">
+        <form class="card-form" name="newRecipeForm" data-ng-submit="create(newRecipe)">
           <label for="newRecipeTitle">Recipe Name: </label>
           <input type="text" id="newRecipeTitle" required data-ng-model="newRecipe.title">
           <button class="btn" type="submit" data-ng-disabled="newRecipeForm.$invalid">Create New Recipe</button>
-      </form>
-    </div>
-      </section>
-    <section class="row">
-    <section class="card one-third column">
-    <div class="card-top">
-    <h3>Recipe List</h3>
-       <div class="card-bottom">
-    <ul class="recipe-list">
-      <section data-ng-repeat="recipe in recipes">
-        <li>
-          <button type="button" class="btn" data-ng-click="seeRecipe(recipe)">{{recipe.title}}</a>
-        </button>
-    </section>
-    </ul>
-  </div>
-  </section>
-   <section class="card two-thirds column" data-ng-if="currentRecipe !== null">
-    <div class="card-top">
-     <h3>{{currentRecipe.title}}</h3>
-   </div>
-      <div class="card-bottom">
-      <form class="edit-recipe-form" name="recipeForm{{currentRecipe._id}}" data-ng-submit="update(currentRecipe)" data-ng-if="currentRecipe.editing">
-            <label for="recipeTitle{{currentRecipe._id}}">Recipe Name: </label>
-            <input type="text" id="recipeTitle{{currentRecipe._id}}" required data-ng-model="currentRecipe.title">
-            <fieldset>
-              <legend>Ingredients:</legend>
-              <section class="ingredient-fields" data-ng-repeat="ingredient in currentRecipe.ingredients track by $index">
-              <input type="text" id="recipeTitle{{currentRecipe._id}}" required data-ng-model="currentRecipe.ingredients[$index]">
-              <button type="button" data-ng-click="removeIngredientField(currentRecipe, ingredient)">Remove</button>
-              </section>
-              <button type="button" class="btn add-ingredient" data-ng-click="addIngredientField(currentRecipe)">Add Ingredient</button>
-            </fieldset>
-            <button class="btn" type="submit" ng-disabled="recipeForm{{currentRecipe._id}}.$invalid" id="recipeForm{{currentRecipe._id}}">Update Recipe</button>
-            <button class="btn" type="button" data-ng-click="cancelEditing(currentRecipe)">Cancel Update</button>
         </form>
-    <div class="card-bottom" data-ng-if="!currentRecipe.editing">
-     <strong>Ingredients:</strong>
-     <ul>
-       <li data-ng-repeat="ingredient in currentRecipe.ingredients">
-        {{ingredient}}
-       </li>
-     </ul>
-      <button class="btn btn-edit" data-ng-click="makeCopy(currentRecipe)">Edit</button>
-      <button class="btn btn-delete" data-ng-click="remove(currentRecipe)">Delete</button>
-   </section>
-  </section>
-  </main>
-  <script src="bundle.js"></script>
-</body>
-</html>
+      </div>
+    </section>
+    <section class="row">
+      <section class="card one-third column recipe-list-card">
+        <div class="card-top">
+          <h3>Recipe List</h3>
+          <div class="card-bottom">
+            <ul class="recipe-list">
+              <section data-ng-repeat="recipe in recipes">
+                <li>
+                  <button type="button" class="btn" data-ng-click="seeRecipe(recipe)">{{recipe.title}}</a>
+                  </button>
+                </section>
+              </ul>
+            </div>
+          </section>
+          <section class="card two-thirds column" data-ng-if="currentRecipe !== null">
+            <div class="card-top">
+             <h3>{{currentRecipe.title}}</h3>
+           </div>
+           <div class="card-bottom">
+            <div data-ng-if="currentRecipe.editing" data-recipe-form-directive
+              data-button-text="Update Recipe"
+              data-form-name="recipeForm{{currentRecipe._id}}"
+              data-recipe="currentRecipe"
+              data-add-ingredient-field="addIngredientField(recipe, ingredient)"
+              data-remove-ingredient-field="removeIngredientField(recipe)"
+              data-cancel="cancelEditing(recipe)"
+              data-save="update(recipe)">
+            </div>
+            <div class="card-bottom" data-ng-if="!currentRecipe.editing">
+             <strong>Ingredients:</strong>
+             <ul>
+               <li data-ng-repeat="ingredient in currentRecipe.ingredients">
+                {{ingredient}}
+              </li>
+            </ul>
+            <button class="btn btn-edit" data-ng-click="makeCopy(currentRecipe)">Edit</button>
+            <button class="btn btn-delete" data-ng-click="remove(currentRecipe)">Delete</button>
+          </section>
+        </section>
+      </main>
+      <script src="bundle.js"></script>
+    </body>
+    </html>

@@ -1,0 +1,14 @@
+<form class="{{formClass}}" name="{{formName}}" data-ng-submit="save({recipe:recipe})">
+  <label for="recipeTitle{{recipe._id}}">Recipe Name: </label>
+  <input type="text" id="recipeTitle{{recipe._id}}" required data-ng-model="recipe.title">
+  <fieldset>
+    <legend>Ingredients:</legend>
+    <section class="ingredient-fields" data-ng-repeat="ingredient in recipe.ingredients track by $index">
+      <input type="text" id="recipeTitle{{recipe._id}}" required data-ng-model="recipe.ingredients[$index]">
+      <button type="button" data-ng-click="removeIngredientField({recipe:recipe}, ingredient)">Remove</button>
+    </section>
+    <button type="button" class="btn add-ingredient" data-ng-click="addIngredientField({recipe:recipe})">Add Ingredient</button>
+  </fieldset>
+  <button class="btn" type="submit" ng-disabled="recipeForm{{recipe._id}}.$invalid" id="recipeForm{{recipe._id}}">{{buttonText}}</button>
+  <button class="btn" type="button" data-ng-click="cancel({recipe:recipe})">Cancel Update</button>
+</form>

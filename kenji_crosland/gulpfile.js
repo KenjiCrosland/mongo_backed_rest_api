@@ -7,7 +7,7 @@ var gulpWatch = require('gulp-watch');
 var sass = require('gulp-sass');
 var maps = require('gulp-sourcemaps');
 var appFiles = ['index.js','models/**/*.js', 'routes/**/*.js', 'gulpfile.js', 'lib/**/*.js'];
-var testFiles = ['./test/**/*.js'];
+var testFiles = ['./test/test.js', './test/recipes_controller_test.js'];
 
 gulp.task('jshint:test', function(){
   return gulp.src(testFiles)
