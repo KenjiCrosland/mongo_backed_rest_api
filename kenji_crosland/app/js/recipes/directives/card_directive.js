@@ -6,7 +6,7 @@ module.exports = function(app) {
       transclude: true,
       templateUrl: '/templates/card_template.html',
       scope: {
-        header: '@',
+        header: '=',
         headerText: '@',
         width: '@' //two columns, three columns, etc
       }
