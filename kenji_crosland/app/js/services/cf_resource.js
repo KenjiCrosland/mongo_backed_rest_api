@@ -1,3 +1,5 @@
+//Made with help from watching in-class code videos
+
 var handleSuccess = function(callback) {
   return function(res) {
     callback(null, res.data)

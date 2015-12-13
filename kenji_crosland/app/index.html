@@ -11,20 +11,19 @@
   <section class="row top-row">
     <h1 class="main-headline">Our Super Recipe App</h1>
   </section>
-  <section class="card row">
-    <div class="card-top">
-      <h2>Add a new Recipe!</h2>
-    </div>
-    <div class="card-bottom">
-      <form class="card-form" name="newRecipeForm" data-ng-submit="create(newRecipe)">
-        <label for="newRecipeTitle">Recipe Name: </label>
-        <input type="text" id="newRecipeTitle" required data-ng-model="newRecipe.title">
-        <button class="btn" type="submit" data-ng-disabled="newRecipeForm.$invalid">Create New Recipe</button>
-      </form>
-    </div>
-  </section>
+  <div data-card-directive
+  header="h2"
+  data-header-text="Add a New Recipe!"
+  data-width="row">
+  <form class="card-form" name="newRecipeForm" data-ng-submit="create(newRecipe)">
+      <label for="newRecipeTitle">Recipe Name: </label>
+      <input type="text" id="newRecipeTitle" required data-ng-model="newRecipe.title">
+      <button class="btn" type="submit" data-ng-disabled="newRecipeForm.$invalid">Create New Recipe</button>
+    </form>
+  </div>
   <div class="row">
     <div data-card-directive
+    header="h3"
     data-header-text="Recipe List"
     data-width="one-third column">
       <ul class="recipe-list">
@@ -40,6 +39,7 @@
   data-header-text="{{currentRecipe.title}}"
   data-width="two-thirds column">
     <div data-ng-if="currentRecipe.editing" data-recipe-form-directive
+        header="h3"
         data-button-text="Update Recipe"
         data-form-name="recipeForm{{currentRecipe._id}}"
         data-recipe="currentRecipe"

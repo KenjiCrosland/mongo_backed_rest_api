@@ -1,6 +1,9 @@
 <section class="card {{width}} recipe-list-card">
-  <div class="card-top">
-    <h3>{{headerText}}</h3>
+  <div class="card-top" ng-switch on="header">
+    <h1 ng-switch-when="h1">{{headerText}}</h1>
+    <h2 ng-switch-when="h2">{{headerText}}</h2>
+    <h3 ng-switch-when="h3">{{headerText}}</h3>
+    <h3 ng-switch-default>{{headerText}}</h3>
   </div>
   <div class="card-bottom">
     <div ng-transclude></div>
