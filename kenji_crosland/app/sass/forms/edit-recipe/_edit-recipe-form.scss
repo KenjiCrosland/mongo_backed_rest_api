@@ -1,0 +1,16 @@
+.edit-recipe-form {
+  label {
+    font-weight: 600;
+  }
+  input {
+    width: 100%;
+  }
+  fieldset {
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    input {
+      width:75%;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+$button: (
+  disabled-background: lighten($primary2, 20%),
+  disabled-border: lighten($primary2, 50%),
+  disabled-text: $light-shading
+);

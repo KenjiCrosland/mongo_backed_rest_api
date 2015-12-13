@@ -1,7 +1,7 @@
-@import 'variables';
-@import 'mixins';
+@import 'colors/colors';
 @import 'reset';
 @import 'base';
-@import 'layout';
-@import 'module';
-@import 'state';
+@import 'buttons/buttons';
+@import 'forms/forms';
+@import 'modules/module';
+@import 'layouts/layouts';

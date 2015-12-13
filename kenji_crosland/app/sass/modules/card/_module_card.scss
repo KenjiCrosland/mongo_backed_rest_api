@@ -1,0 +1,19 @@
+@import 'mixin';
+
+.card {
+  h2 {
+    @include card-headline($primary2);
+  }
+  h3 {
+    @include card-headline($primary1);
+  }
+  .card-top {
+    padding: 0;
+  }
+  .card-bottom {
+    padding: 1em;
+  }
+  background-color: $background;
+  margin-top: 1em;
+  box-shadow: 3px 3px 1px #bbb;
+}

@@ -13,14 +13,7 @@ $light-gray: #eef;
 $light-shading: $light-gray;
 $background: $wheat;
 $light-background: $linen;
-//Add lighten to the background
 $primary1: $salmon;
 $primary2: $dark-turquoise;
 $accent: $carnation;
 $strong-accent: $cardinal-red;
-
-$button: (
-  disabled-background: lighten($primary2, 20%),
-  disabled-border: lighten($primary2, 50%),
-  disabled-text: $light-shading
-);
